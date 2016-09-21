@@ -1,6 +1,6 @@
 #include <SDL/SDL.h>
 #include "map.hpp"
-// #include "boat.hpp"
+#include "boat.hpp"
 
 void draw_maze( SDL_Surface * image, SDL_Surface * screen, SDL_Rect dest){
 
@@ -27,8 +27,9 @@ int main()
   SDL_Surface * image_texture; // A imagem
   SDL_Event event; // Evento teclado
   SDL_Rect dest; // Destino da imagem
+  Boat myBoat;
 
-  screen = SDL_SetVideoMode(1080, 660, 16, SDL_SWSURFACE); // Cria a janela
+  screen = SDL_SetVideoMode(SCREEN_WIDTH, SCREEN_HEIGHT, 16, SDL_SWSURFACE); // Cria a janela
   image = SDL_LoadBMP("barco_a_vela.bmp"); // Carrega a imagem no formato BMP
   image_texture = SDL_LoadBMP("texture.bmp"); // Carrega a imagem no formato BMP
 
@@ -43,16 +44,18 @@ int main()
   dest.x = 0; // Ponto de destino no eixo X
   dest.y = 0; // Ponto de destino no exito Y
   SDL_FillRect(screen, NULL, SDL_MapRGB(screen->format, 12, 159, 230));
-  SDL_BlitSurface(image, NULL, screen, &dest); // Joga a imagem no screen em dest
-  SDL_UpdateRect(screen, 0,0,0,0); // Atualiza o screen com a imagem blitada
+  draw_maze(image_texture,screen,dest);
 
   bool done = 0;
   while(done==0){
-    draw_maze(image_texture,screen,dest);
     while(SDL_PollEvent(&event)){
+        myBoat.handle_input(event);
       }
       if (event.type == SDL_QUIT) // Se o usuário clicou para fechar a janela
         done = 1;
+      myBoat.move();
+      myBoat.show(image,screen);
+      SDL_UpdateRect(screen, 0,0,0,0); // Atualiza o screen com a imagem blitada
   }
 
   SDL_Quit(); // Fecha o SDL

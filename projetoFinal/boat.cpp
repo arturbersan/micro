@@ -1,4 +1,4 @@
-#include <SDL/SDL.h">
+#include <SDL/SDL.h>
 #include "boat.hpp"
 
 Boat::Boat(){
@@ -7,14 +7,14 @@ Boat::Boat(){
   box.y = 0;
   //Inicializando a dimensão
   box.w = SQUARE_WIDTH;
-  box.h = SQUARE_HEIGTH;
+  box.h = SQUARE_HEIGHT;
 
   //Inicializando a velocidade
   xVel = 0;
   yVel = 0;
 }
 
-void Square::handle_input()
+void Boat::handle_input(SDL_Event event)
 {
   //If a key was pressed
   if( event.type == SDL_KEYDOWN )
@@ -42,10 +42,11 @@ void Square::handle_input()
   }
 }
 
-void Square::move()
+void Boat::move()
 {
   //Move the square left or right
   box.x += xVel;
+  printf("BoxX = %d\n", box.x);
 
   //If the square went too far to the left or right or has collided with the wall
   if( ( box.x < 0 ) || ( box.x + SQUARE_WIDTH > SCREEN_WIDTH ) )
@@ -56,6 +57,7 @@ void Square::move()
 
   //Move the square up or down
   box.y += yVel;
+  printf("BoxY = %d\n", box.y);
 
   //If the square went too far up or down or has collided with the wall
   if( ( box.y < 0 ) || ( box.y + SQUARE_HEIGHT > SCREEN_HEIGHT ) )
@@ -63,4 +65,14 @@ void Square::move()
     //Move back
     box.y -= yVel;
   }
+}
+
+void Boat::show(SDL_Surface * image,SDL_Surface * screen)
+{
+  SDL_Rect dest;
+
+  dest.x = box.x;
+  dest.y = box.y;
+  //Mostra o Barco
+  SDL_BlitSurface(image, NULL, screen, &dest);
 }
