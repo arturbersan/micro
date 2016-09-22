@@ -40,12 +40,6 @@ int main()
     return 1;
   }
 
-  // Move a imagem para o ponto X = 0 e Y = 0
-  dest.x = 0; // Ponto de destino no eixo X
-  dest.y = 0; // Ponto de destino no exito Y
-  SDL_FillRect(screen, NULL, SDL_MapRGB(screen->format, 12, 159, 230));
-  draw_maze(image_texture,screen,dest);
-
   bool done = 0;
   while(done==0){
     while(SDL_PollEvent(&event)){
@@ -53,9 +47,11 @@ int main()
       }
       if (event.type == SDL_QUIT) // Se o usuário clicou para fechar a janela
         done = 1;
+      draw_maze(image_texture,screen,dest);
       myBoat.move();
+      SDL_FillRect(screen, NULL, SDL_MapRGB(screen->format, 12, 159, 230));
       myBoat.show(image,screen);
-      SDL_UpdateRect(screen, 0,0,0,0); // Atualiza o screen com a imagem blitada
+      // SDL_UpdateRect(screen, 0,0,0,0); // Atualiza o screen com a imagem blitada
   }
 
   SDL_Quit(); // Fecha o SDL

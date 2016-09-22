@@ -22,10 +22,10 @@ void Boat::handle_input(SDL_Event event)
     //Adjust the velocity
     switch( event.key.keysym.sym )
     {
-      case SDLK_UP: yVel -= SQUARE_HEIGHT / 2; break;
-      case SDLK_DOWN: yVel += SQUARE_HEIGHT / 2; break;
-      case SDLK_LEFT: xVel -= SQUARE_WIDTH / 2; break;
-      case SDLK_RIGHT: xVel += SQUARE_WIDTH / 2; break;
+      case SDLK_UP: yVel -= 5; break;
+      case SDLK_DOWN: yVel += 5; break;
+      case SDLK_LEFT: xVel -= 5; break;
+      case SDLK_RIGHT: xVel += 5; break;
     }
   }
   //If a key was released
@@ -34,10 +34,10 @@ void Boat::handle_input(SDL_Event event)
     //Adjust the velocity
     switch( event.key.keysym.sym )
     {
-      case SDLK_UP: yVel += SQUARE_HEIGHT / 2; break;
-      case SDLK_DOWN: yVel -= SQUARE_HEIGHT / 2; break;
-      case SDLK_LEFT: xVel += SQUARE_WIDTH / 2; break;
-      case SDLK_RIGHT: xVel -= SQUARE_WIDTH / 2; break;
+      case SDLK_UP: yVel += 5; break;
+      case SDLK_DOWN: yVel -= 5; break;
+      case SDLK_LEFT: xVel += 5; break;
+      case SDLK_RIGHT: xVel -= 5; break;
     }
   }
 }
