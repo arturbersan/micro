@@ -1,7 +1,41 @@
 #include <SDL/SDL.h>
 #include "boat.hpp"
+#include "map.hpp"
 
-Boat::Boat(){
+bool Boat::check_colision()
+{
+  //The sides of the rectangles
+  int leftA, leftB,rightA, rightB,topA, topB,bottomA, bottomB;
+  //Calculate the sides of rect A
+  leftA = box.x;
+  rightA = box.x + box.w;
+  topA = box.y;
+  bottomA = box.y + box.h;
+  //If any of the sides from A are outside of B
+  // int i = (box.x)/SQUARE_WIDTH, j = (box.y)/SQUARE_HEIGHT;
+  // if(init_stage[i][j]){
+    // printf("i = %d\nj = %d\n",i,j);
+    // //Calculate the sides of rect B
+    // leftB = i*60;
+    // rightB = i*60 + 60;
+    // topB = j*60;
+    // bottomB = j*60+60;
+    //
+    // if( bottomA <= 60 )
+    //   return false;
+    // if( topA >= 60 )
+    //   return false;
+    // if( rightA <= 60 )
+    //   return false;
+    // if( leftA >= 60)
+    //   return false;
+  // }
+  //If none of the sides from A are outside B
+  return true;
+}
+
+Boat::Boat()
+{
   //Inicializando a posição inicial
   box.x = 0;
   box.y = 0;
@@ -42,23 +76,19 @@ void Boat::handle_input(SDL_Event event)
   }
 }
 
-void Boat::move()
+void Boat::move(SDL_Surface * image)
 {
+  printf("Posição (%d,%d)\n",box.x,box.y);
   //Move the square left or right
   box.x += xVel;
-  printf("BoxX = %d\n", box.x);
-
   //If the square went too far to the left or right or has collided with the wall
   if( ( box.x < 0 ) || ( box.x + SQUARE_WIDTH > SCREEN_WIDTH ) )
   {
     //Move back
     box.x -= xVel;
   }
-
   //Move the square up or down
   box.y += yVel;
-  printf("BoxY = %d\n", box.y);
-
   //If the square went too far up or down or has collided with the wall
   if( ( box.y < 0 ) || ( box.y + SQUARE_HEIGHT > SCREEN_HEIGHT ) )
   {
