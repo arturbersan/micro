@@ -32,7 +32,8 @@ int main()
       if (event.type == SDL_QUIT) // Se o usuário clicou para fechar a janela
         done = 1;
       myMaze.draw_maze(image_texture,screen,dest);
-      myBoat.move(image_texture);
+      myBoat.move(image_texture, myMaze);
+      myMaze.wall.clear();
       SDL_FillRect(screen, NULL, SDL_MapRGB(screen->format, 12, 159, 230));
       myBoat.show(image,screen);
       // SDL_UpdateRect(screen, 0,0,0,0); // Atualiza o screen com a imagem blitada
