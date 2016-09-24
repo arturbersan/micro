@@ -24,8 +24,9 @@ class Boat {
     void move(SDL_Surface * image, Maze myMaze);
     //Mostrar o Barco
     void show(SDL_Surface * image,SDL_Surface * screen);
+    //Verifica se o barco irá bater na parede
+    bool check_collision(pair<int,int> singleWall);
     //Verifica se o barco irá bater no labirinto
-    bool check_collision(Maze myMaze);
 };
 
 #endif
